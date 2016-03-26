@@ -6,6 +6,5 @@ chrome.extension.onMessage.addListener(function onRequest(request, sender, sendR
       console.log("tab:", tab);
     });
     chrome.pageAction.show(sender.tab.id);
-    sendResponse("i showed that shit");
   }
 });

@@ -1,6 +1,5 @@
 if (window.location.href.indexOf("/blame/") !== -1) {
   chrome.extension.sendMessage("showIcon", function(response) {
-    console.log("response from showIcon request:", response);
     addLinks();
   });
 }
