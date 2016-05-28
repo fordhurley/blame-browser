@@ -14,16 +14,10 @@ function addLinks() {
     var line = commit.nextElementSibling
     var lineNum = line.getElementsByClassName('blob-num')[0].id;
     var link = document.createElement('a');
-    link.href = blameLink(sha, lineNum);
+    link.className = 'blame-parent';
     link.innerHTML = 'blame parent';
-    link.style.float = 'right';
-    link.style.fontSize = '10px';
+    link.href = blameLink(sha, lineNum);
     var meta = info.getElementsByClassName('blame-commit-meta')[0];
-    if (meta.getElementsByTagName('svg').length > 0) {
-      // There is a comment link icon, so space it out.
-      // FIXME: just do this with CSS.
-      link.style.marginRight = '1em';
-    }
     meta.appendChild(link);
   }
 }

@@ -1,0 +1,8 @@
+.blame-parent {
+  font-size: 10px;
+  float: right;
+}
+
+.blame-commit-meta .octicon-comment {
+  margin-left: 0.5em;
+}
