@@ -1,25 +1,31 @@
-if (window.location.href.indexOf("/blame/") !== -1) {
-  chrome.extension.sendMessage("showIcon", function(response) {
+if (window.location.href.indexOf('/blame/') !== -1) {
+  chrome.extension.sendMessage('showIcon', function(response) {
     addLinks();
   });
 }
 
 function addLinks() {
-  var commits = window.document.getElementsByClassName("blame-commit");
-  Array.prototype.forEach.call(commits, function(commit) {
-    var info = commit.getElementsByClassName("blame-commit-info")[0];
+  var commits = window.document.getElementsByClassName('blame-commit');
+  for (var i = 0; i < commits.length; i++) {
+    var commit = commits[i];
+    var info = commit.getElementsByClassName('blame-commit-info')[0];
     var shaLink = info.getElementsByClassName('blame-sha')[0];
     var sha = shaLink.textContent
     var line = commit.nextElementSibling
     var lineNum = line.getElementsByClassName('blob-num')[0].id;
-    var link = document.createElement("a");
+    var link = document.createElement('a');
     link.href = blameLink(sha, lineNum);
     link.innerHTML = 'blame parent';
     link.style.float = 'right';
-    link.style.clear = 'right';
     link.style.fontSize = '10px';
-    info.insertBefore(link, info.getElementsByClassName('blame-commit-title')[0]);
-  });
+    var meta = info.getElementsByClassName('blame-commit-meta')[0];
+    if (meta.getElementsByTagName('svg').length > 0) {
+      // There is a comment link icon, so space it out.
+      // FIXME: just do this with CSS.
+      link.style.marginRight = '1em';
+    }
+    meta.appendChild(link);
+  }
 }
 
 function blameLink(sha, lineNum) {
